@@ -1,10 +1,9 @@
-import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
 import tailwindcssAnimate from "tailwindcss-animate";
 
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   darkMode: ["class"],
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{js,jsx}"],
   theme: {
     container: {
       center: true,
@@ -24,13 +23,15 @@ const config: Config = {
         card: "hsl(var(--background))",
         muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",
+        primary: "hsl(var(--primary))",
+        "primary-foreground": "hsl(var(--primary-foreground))",
       },
       borderRadius: {
         "3xl": "1.5rem",
       },
     },
   },
-  plugins: [tailwindcssAnimate, plugin(() => {})],
+  plugins: [tailwindcssAnimate],
 };
 
 export default config;
