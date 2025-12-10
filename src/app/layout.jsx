@@ -14,7 +14,7 @@ import { frFR } from "@clerk/localizations";
 import { Geist } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { ToastProvider } from "@/composants.jsx";
+import { Providers } from "./providers";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
@@ -28,7 +28,7 @@ export default function Layout({ children }) {
     <ClerkProvider localization={frFR}>
       <html lang="fr">
         <body className={`${geist.variable} font-sans min-h-screen bg-gray-50`}>
-          <ToastProvider>
+          <Providers>
             
             {/* ═══════════════ EN-TÊTE ═══════════════ */}
             <header className="sticky top-0 z-40 border-b bg-white/90 backdrop-blur">
@@ -86,7 +86,7 @@ export default function Layout({ children }) {
               </div>
             </footer>
             
-          </ToastProvider>
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
