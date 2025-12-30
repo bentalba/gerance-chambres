@@ -38,7 +38,7 @@ Ouvre ensuite : http://localhost:3000
 
 ### Option Windows : un seul clic sur PowerShell
 
-Sur Windows, fais **clic droit → Exécuter avec PowerShell** sur `Demarrer.ps1`.
+Sur Windows, double-clique sur `Demarrer.bat` (ça appelle PowerShell avec les bons paramètres) ou fais **clic droit → Exécuter avec PowerShell** sur `Demarrer.ps1`.
 Le script vérifie Node, télécharge les dépendances (`npm install`) si besoin, crée `.env.local` et lance `npm run dev`.
 
 Alternative (si tu préfères une commande) :
