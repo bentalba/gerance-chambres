@@ -11,6 +11,14 @@ Atlas est une mini-application web de réservation d’hôtels au Maroc :
 - affichage du prix en **MAD**
 - page “Mes réservations” (données de démonstration)
 
+## 🛠️ Comment c’est construit (simple)
+
+- **Next.js 16 (App Router)** + **React 19** pour le front.
+- **Tailwind CSS** pour le style minimal.
+- **Clerk** pour l’authentification (localisation FR).
+- **react-day-picker** + **date-fns** pour les dates.
+- Turbopack activé pour des démarrages rapides en dev.
+
 ## ✅ Démarrage “1 clic” (zéro setup manuel)
 
 Après avoir cloné le projet, tu as **une seule action** à faire.
@@ -31,6 +39,7 @@ Ouvre ensuite : http://localhost:3000
 ### Option Windows : un seul clic sur PowerShell
 
 Sur Windows, fais **clic droit → Exécuter avec PowerShell** sur `Demarrer.ps1`.
+Le script vérifie Node, télécharge les dépendances (`npm install`) si besoin, crée `.env.local` et lance `npm run dev`.
 
 Alternative (si tu préfères une commande) :
 
