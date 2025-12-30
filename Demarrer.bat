@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-REM Lance PowerShell avec la politique d'exécution bypass pour exécuter Demarrer.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Demarrer.ps1"
+REM Lance PowerShell en contournant la policy pour cette session et en se plaçant dans le dossier du script
+powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; Set-Location '%~dp0'; .\Demarrer.ps1"
 
 endlocal

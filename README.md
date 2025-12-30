@@ -41,6 +41,14 @@ Ouvre ensuite : http://localhost:3000
 Sur Windows, double-clique sur `Demarrer.bat` (ça appelle PowerShell avec les bons paramètres) ou fais **clic droit → Exécuter avec PowerShell** sur `Demarrer.ps1`.
 Le script vérifie Node, télécharge les dépendances (`npm install`) si besoin, crée `.env.local` et lance `npm run dev`.
 
+Si Windows bloque encore l’exécution des scripts, ouvre PowerShell dans le dossier et lance :
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\Demarrer.ps1"
+```
+
+Cela contourne la restriction uniquement pour cette session.
+
 Alternative (si tu préfères une commande) :
 
 ```bash
