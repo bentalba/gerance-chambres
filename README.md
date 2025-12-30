@@ -3,6 +3,14 @@
 **Projet d’examen EMSI**  
 **Auteur : OUSSAMA SAJJI**
 
+## 📝 Description (très courte)
+
+Atlas est une mini-application web de réservation d’hôtels au Maroc :
+- recherche d’hôtels par ville
+- sélection d’une chambre + dates
+- affichage du prix en **MAD**
+- page “Mes réservations” (données de démonstration)
+
 ## ✅ Démarrage “1 clic” (zéro setup manuel)
 
 Après avoir cloné le projet, tu as **une seule action** à faire.
@@ -19,6 +27,16 @@ Ce script fait automatiquement :
 - lancement de l’app (`npm run dev`)
 
 Ouvre ensuite : http://localhost:3000
+
+### Option Windows : un seul clic sur PowerShell
+
+Sur Windows, fais **clic droit → Exécuter avec PowerShell** sur `Demarrer.ps1`.
+
+Alternative (si tu préfères une commande) :
+
+```bash
+npm run demarrer:win
+```
 
 ### Option B (macOS) : double-clic
 
