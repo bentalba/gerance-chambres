@@ -48,19 +48,23 @@ try {
     Write-Warn "ℹ️  Remplace les clés Clerk/Mapbox/DB dans .env.local si nécessaire."
   }
 
-  # 3bis) Initialiser DB SQLite (si DATABASE_URL=file:...)
+  # 3bis) Initialiser DB (MySQL ou SQLite) si DATABASE_URL est défini
   if (Test-Path $envLocal) {
     $envContent = Get-Content $envLocal -Raw
     if ($envContent -match "(?m)^DATABASE_URL\s*=\s*(.+)\s*$") {
       $dbUrl = $Matches[1].Trim().Trim('"')
-      if ($dbUrl.StartsWith('file:')) {
-        Write-Info "🗄️  Initialisation DB SQLite (Prisma)..."
+      try {
+        Write-Info "🗄️  Initialisation DB (Prisma)..."
         npx prisma generate
         npx prisma db push
         if (Test-Path (Join-Path $PSScriptRoot 'prisma\seed.js')) {
           node .\prisma\seed.js
         }
         Write-Ok "✅ DB prête"
+      }
+      catch {
+        Write-Warn "⚠️  Initialisation DB échouée. Vérifie MySQL (ou la connexion) puis relance."
+        Write-Warn "Détail: $($_.Exception.Message)"
       }
     }
   }

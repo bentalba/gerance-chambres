@@ -39,7 +39,7 @@ Ouvre ensuite : http://localhost:3000
 ### Option Windows : un seul clic sur PowerShell
 
 Sur Windows, double-clique sur `Demarrer.bat` (ça appelle PowerShell avec les bons paramètres) ou fais **clic droit → Exécuter avec PowerShell** sur `Demarrer.ps1`.
-Le script vérifie Node, télécharge les dépendances (`npm install`) si besoin, crée `.env.local`, initialise la base SQLite si `DATABASE_URL=file:./dev.db` (Prisma generate + db push + seed), puis lance `npm run dev`.
+Le script vérifie Node, télécharge les dépendances (`npm install`) si besoin, crée `.env.local`, tente d’initialiser la base MySQL (Prisma generate + db push + seed) si `DATABASE_URL` pointe sur MySQL, puis lance `npm run dev`. Si MySQL n’est pas accessible, un avertissement s’affiche mais le serveur démarre quand même (mode mock possible).
 
 Si Windows bloque encore l’exécution des scripts, ouvre PowerShell dans le dossier et lance :
 
@@ -67,36 +67,32 @@ Le projet crée automatiquement `.env.local` à partir de `.env.example`.
 
 Pour activer l’authentification (Clerk) et la carte (Mapbox), remplace les valeurs dans `.env.local`.
 
-## 🗄️ Base de données SQL (rapide)
+## 🗄️ Base de données SQL (MySQL)
 
-Le projet peut fonctionner en **mode démo** (données mock), mais tu peux aussi créer une **base SQL locale** rapidement.
-
-### Option simple (recommandée) : SQLite
-
-- Dans `.env.local`, mets :
-    - `DATABASE_URL=file:./dev.db`
-- Ensuite, au démarrage “1 clic”, la base est initialisée automatiquement (Prisma : generate + db push + seed).
-
-Commandes manuelles si besoin :
-
-```bash
-npx prisma generate
-npx prisma db push
-node prisma/seed.js
-```
+- Dans `.env.local`, configure :
+    - `DATABASE_URL="mysql://user:password@localhost:3306/hotel_db"`
+- Assure-toi que MySQL tourne et que la base existe.
+- Initialisation :
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    node prisma/seed.js
+    ```
+- Les scripts 1-clic tenteront aussi `db push` + `seed` ; en cas d’échec (MySQL down ou credentials), un avertissement est affiché mais le serveur démarre (données mock toujours possibles).
 
 ## 📁 Structure (minimum de fichiers)
 
 ```
 src/
-├── composants.jsx        (UI : boutons, cards, calendrier, toast…)
-├── lib/donnees.js        (données mock + utilitaires)
+├── composants.jsx         (UI : boutons, cards, calendrier, toast…)
+├── lib/donnees.js         (données mock + utilitaires)
+├── lib/hotelService.js    (logique Métier + Prisma MySQL)
 └── app/
-    ├── layout.jsx        (mise en page)
-    ├── providers.jsx     (providers client : Toast)
-    ├── page.jsx          (accueil)
-    ├── recherche/        (recherche + actions serveur)
-    └── reservations/     (mes réservations)
+    ├── layout.jsx         (mise en page)
+    ├── providers.jsx      (providers client : Toast)
+    ├── page.jsx           (accueil)
+    ├── recherche/         (recherche + actions serveur)
+    └── reservations/      (mes réservations + actions Prisma)
 ```
 
 ## 🧪 Commandes utiles

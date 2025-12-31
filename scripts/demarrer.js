@@ -56,17 +56,24 @@ function ensureDatabase() {
 
   const databaseUrl = m[1].trim().replace(/^"|"$/g, "");
   const isSqlite = databaseUrl.startsWith("file:");
-  if (!isSqlite) return;
+  const isMySQL = databaseUrl.startsWith("mysql:");
 
-  log("🗄️  Initialisation DB SQLite (Prisma)...");
-  // generate pour éviter les erreurs de client manquant
-  run("npx", ["prisma", "generate"]);
-  // db push (rapide, pas besoin de migrations pour un setup express)
-  run("npx", ["prisma", "db", "push"]);
-  // seed (si présent)
-  const seed = path.join(ROOT, "prisma", "seed.js");
-  if (fs.existsSync(seed)) {
-    run("node", ["prisma/seed.js"]);
+  try {
+    log("🗄️  Initialisation base de données (Prisma)...");
+    run("npx", ["prisma", "generate"]);
+
+    // Pour MySQL, on tente un db push (sans migrations) ; pour SQLite aussi
+    run("npx", ["prisma", "db", "push"]);
+
+    // seed (si présent)
+    const seed = path.join(ROOT, "prisma", "seed.js");
+    if (fs.existsSync(seed)) {
+      run("node", ["prisma/seed.js"]);
+    }
+  } catch (err) {
+    log("⚠️  Impossible d'initialiser la base. Vérifie que MySQL est démarré et que DATABASE_URL est correct.");
+    log(`Détail: ${err.message || err}`);
+    // On continue quand même pour laisser l'app démarrer (utilisation mock possible)
   }
 }
 

@@ -1,4 +1,4 @@
-// Prisma schema (SQLite) — création rapide d'une base SQL locale
+// Prisma schema (MySQL) — Gestion Hôtel
 // Documentation: https://www.prisma.io/docs
 
 generator client {
@@ -6,40 +6,53 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model Hotel {
-  id       String  @id @default(cuid())
-  nom      String
-  ville    String
-  image    String?
-  prixBase Int
-
+model Client {
+  id           Int           @id @default(autoincrement())
+  nom          String
+  prenom       String
+  adresse      String
   reservations Reservation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model Chambre {
+  id           Int                  @id @default(autoincrement())
+  numero       String               @unique
+  telephone    String
+  reservations ReservationChambre[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Reservation {
-  id           String   @id @default(cuid())
-  userId       String
+  id        Int       @id @default(autoincrement())
+  code      String    @unique
+  clientId  Int
+  client    Client    @relation(fields: [clientId], references: [id])
+  etat      String    @default("EnCours")
+  dateDebut DateTime
+  dateFin   DateTime
 
-  hotelId      String
-  hotel        Hotel    @relation(fields: [hotelId], references: [id])
+  chambres ReservationChambre[]
 
-  chambreNom   String
-  voyageurs    Int
-  dateArrivee  DateTime
-  dateDepart   DateTime
-  prixTotal    Int
-  statut       String   @default("confirmed")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model ReservationChambre {
+  reservationId Int
+  chambreId     Int
 
-  @@index([userId])
-  @@index([hotelId])
+  reservation Reservation @relation(fields: [reservationId], references: [id])
+  chambre     Chambre     @relation(fields: [chambreId], references: [id])
+
+  @@id([reservationId, chambreId])
+  @@index([chambreId])
 }
