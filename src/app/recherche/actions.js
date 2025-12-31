@@ -35,9 +35,9 @@ export async function creerReservation(donnees) {
 
 /**
  * Annule une réservation existante
- * @param {string} reservationId - ID de la réservation
  * @returns {Object} Résultat de l'opération
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function annulerReservation(reservationId) {
   await new Promise((resolve) => setTimeout(resolve, 300));
 

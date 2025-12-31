@@ -60,6 +60,7 @@ export default function Accueil() {
               className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all"
             >
               <div className="aspect-[4/3] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={dest.image}
                   alt={dest.city}

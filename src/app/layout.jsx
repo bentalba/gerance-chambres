@@ -81,8 +81,9 @@ export default function Layout({ children }) {
             {/* ═══════════════ PIED DE PAGE ═══════════════ */}
             <footer className="border-t bg-white py-8 mt-16">
               <div className="mx-auto max-w-6xl px-4 text-center text-sm text-gray-500">
-                <p>© 2024 Atlas - Réservation d'hôtels au Maroc 🇲🇦</p>
-                <p className="mt-1">Projet de démonstration - Next.js + Clerk + Tailwind</p>
+                <p>© 2024 Atlas - Reservation hotels au Maroc</p>
+                <p className="mt-1">Projet EMSI - Prepare par Oussama SAJJI</p>
+                <p className="mt-1 text-xs">Next.js + Clerk + Tailwind + Prisma MySQL</p>
               </div>
             </footer>
             

@@ -1,4 +1,7 @@
-/* Seed Prisma (MySQL) – Gestion Hôtel */
+/* eslint-disable @typescript-eslint/no-require-imports */
+/**
+ * Seed Prisma (MySQL) - Projet EMSI par Oussama SAJJI
+ */
 
 const { PrismaClient } = require("@prisma/client");
 

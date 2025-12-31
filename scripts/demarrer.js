@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-unused-vars */
 /**
- * Script "1 clic" :
+ * Script "1 clic" - Projet EMSI par Oussama SAJJI
  * - Installe les dépendances si besoin
  * - Prépare .env.local si manquant (copie depuis .env.example)
  * - Lance Next.js en développement
