@@ -6,6 +6,7 @@
   "scripts": {
     "demarrer": "node scripts/demarrer.js",
     "demarrer:win": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\Demarrer.ps1",
+    "menu": "node menu.js",
     "setup": "npm install",
     "dev": "next dev --turbo",
     "build": "next build",
